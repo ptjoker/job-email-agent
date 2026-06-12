@@ -1,119 +1,364 @@
 # Job Email Agent
 
-A cautious email triage agent for job-alert emails.
+![Python](https://img.shields.io/badge/Python-3.11+-blue)
+![Gmail API](https://img.shields.io/badge/Gmail-API-red)
+![Status](https://img.shields.io/badge/status-in%20development-orange)
 
-It connects to Gmail, finds likely job-alert messages, labels them by usefulness, and writes a daily "top jobs" digest. It does not delete email.
+A local productivity tool that helps automate and organise the job search process.
 
-## What It Does
+Job Email Agent connects to your Gmail account, scans job-alert emails, analyses opportunities based on your preferences, creates daily job summaries, and helps prepare application materials from your local profile.
 
-- Finds job-alert messages from LinkedIn, job boards, recruiters, and ATS systems.
-- Scores each message against your role, location, remote, seniority, and keyword preferences.
-- Writes a ranked job queue for application prep.
-- Applies Gmail labels:
-  - `Jobs/Top`
-  - `Jobs/Maybe`
-  - `Jobs/Ignore`
-  - `Jobs/Processed`
-- Creates a Markdown digest in `digests/`.
-- Creates template-based cover letters from your local CV and profile.
-- Logs application drafts in `applications/`.
+The goal is to reduce the manual effort of searching through job emails while keeping the user in control of every application.
 
-## Setup
+> This project assists with job discovery and preparation. It does **not** automatically apply for jobs.
 
-1. Follow Google's Gmail Python quickstart to enable Gmail API access and create an OAuth desktop client:
+---
 
-   https://developers.google.com/workspace/gmail/api/quickstart/python
+## Overview
 
-2. Download the OAuth client JSON file.
-3. Save it as:
+Searching for jobs often involves reading hundreds of emails, comparing requirements, tracking applications, and rewriting similar information repeatedly.
 
-   ```text
-   secrets/credentials.json
-   ```
+Job Email Agent helps by:
 
-4. In Google Cloud, add your Gmail address as a test user:
+- Collecting job opportunities from Gmail
+- Filtering and ranking opportunities
+- Creating a personalised daily digest
+- Tracking application activity
+- Preparing draft cover letters
 
-   - Open your project in Google Cloud Console.
-   - Go to `APIs & Services` -> `OAuth consent screen`.
-   - Find the `Test users` section.
-   - Add the Gmail address you will use with the agent.
-   - Save the changes.
+All processing happens locally, keeping personal information on your own machine.
 
-5. Copy the example config:
+---
 
-   ```powershell
-   Copy-Item config.example.json config.json
-   ```
+## Features
 
-6. Edit `config.json` with your job preferences and CV path.
+### 📩 Gmail Job Email Scanner
 
-7. Edit `profile.json` with your public application details.
+- Connects securely using the Gmail API
+- Searches for job-related emails
+- Extracts relevant job information
+- Avoids modifying or deleting emails
 
-8. Install dependencies:
+---
 
-   ```powershell
-   .\scripts\setup.ps1
-   ```
+### ⭐ Job Ranking System
 
-9. Run a dry run first:
+Jobs are ranked according to your preferences, including:
 
-   ```powershell
-   .\scripts\dry-run.ps1
-   ```
+- Desired job roles
+- Technical skills
+- Location preferences
+- Remote opportunities
+- Visa sponsorship keywords
+- Relocation support
 
-10. If the output looks good, run it for real:
+Example:
 
-   ```powershell
-   .\scripts\run-daily.ps1
-   ```
+```
+Software Developer
+★★★★☆
+Strong match
 
-## Prepare A Cover Letter
+Data Analyst
+★★★☆☆
+Possible match
 
-After a dry run or daily run, list the ranked jobs:
+Sales Assistant
+★☆☆☆☆
+Low match
+```
+
+---
+
+### 📊 Daily Job Digest
+
+Creates a summary of discovered opportunities:
+
+- Best matches
+- Possible opportunities
+- Jobs to ignore
+- Important details extracted from emails
+
+---
+
+### 🏷️ Gmail Organisation
+
+Automatically labels emails:
+
+```
+Top
+Maybe
+Ignore
+Processed
+```
+
+This keeps your inbox organised without removing any messages.
+
+---
+
+### 📝 Application Preparation
+
+The tool can:
+
+- Create a ranked job queue
+- Generate basic cover letter drafts
+- Keep a local application history
+
+Cover letters are generated from your own profile information and templates.
+
+---
+
+### 🖥️ Local Dashboard
+
+A simple browser dashboard allows you to view:
+
+- Ranked jobs
+- Application status
+- Generated documents
+- Daily summaries
+
+Run locally:
+
+```
+http://127.0.0.1:8765
+```
+
+---
+
+## What This Project Does Not Do
+
+For safety and user control, Job Email Agent does **not**:
+
+❌ Automatically submit job applications  
+❌ Fill sensitive information automatically  
+❌ Upload your CV to external services  
+❌ Store personal information online  
+❌ Delete emails  
+
+All applications should be reviewed manually before submission.
+
+---
+
+# Project Structure
+
+```
+job-email-agent/
+
+│
+├── agent/
+│   ├── gmail/
+│   ├── ranking/
+│   ├── generator/
+│   └── dashboard/
+│
+├── scripts/
+│   ├── setup.ps1
+│   ├── dry-run.ps1
+│   ├── run-daily.ps1
+│   └── start-dashboard.ps1
+│
+├── secrets/
+│   └── credentials.json
+│
+├── config.example.json
+├── profile.example.json
+└── README.md
+```
+
+---
+
+# Privacy & Security
+
+This application is designed to run locally.
+
+Never commit private files:
+
+```
+secrets/credentials.json
+token.json
+config.json
+profile.json
+CV files
+generated cover letters
+application logs
+```
+
+Use the provided examples:
+
+```
+config.example.json
+profile.example.json
+```
+
+---
+
+# Requirements
+
+Before running the project you need:
+
+- Windows
+- Python 3.11+
+- Gmail account
+- Google Cloud project
+- Gmail API enabled
+- OAuth credentials
+
+---
+
+# Installation
+
+## 1. Clone the repository
+
+```powershell
+git clone YOUR_REPOSITORY_URL
+
+cd job-email-agent
+```
+
+---
+
+## 2. Run setup
+
+```powershell
+.\scripts\setup.ps1
+```
+
+The setup script creates a virtual environment and installs dependencies.
+
+---
+
+## 3. Configure Gmail API
+
+Enable the Gmail API from Google Cloud.
+
+Follow the official guide:
+
+https://developers.google.com/workspace/gmail/api/quickstart/python
+
+Download your OAuth credentials and save them:
+
+```
+secrets/credentials.json
+```
+
+If your OAuth application is in testing mode, add your Gmail account as a test user.
+
+---
+
+## 4. Configure your profile
+
+The setup script creates:
+
+```
+config.json
+profile.json
+```
+
+Update:
+
+### config.json
+
+Add your:
+
+- preferred roles
+- skills
+- locations
+- preferences
+
+### profile.json
+
+Add your:
+
+- name
+- experience summary
+- education
+- application details
+
+---
+
+# Usage
+
+## Test Gmail scanning safely
+
+```powershell
+.\scripts\dry-run.ps1
+```
+
+This checks emails without applying labels or making changes.
+
+---
+
+## Run daily processing
+
+```powershell
+.\scripts\run-daily.ps1
+```
+
+This:
+
+- scans emails
+- ranks jobs
+- creates the daily digest
+- updates labels
+
+---
+
+## View ranked jobs
 
 ```powershell
 .\scripts\prepare-application.ps1 --list
 ```
 
-Create a cover letter for a specific ranked job:
+---
+
+## Generate a cover letter draft
 
 ```powershell
 .\scripts\prepare-application.ps1 --job-index 1
 ```
 
-This creates:
+---
 
-- a cover letter in `cover_letters/`
-- an application log entry in `applications/YYYY-MM-DD-applications.md`
-
-It does not submit applications or fill sensitive fields.
-
-## Daily Run
-
-After setup, run this once a day using Windows Task Scheduler:
+## Start dashboard
 
 ```powershell
-cd "C:\Users\thaba\Documents\Codex\2026-06-03\can-we-build-an-agent-or\job-email-agent"
-.\scripts\run-daily.ps1
+.\scripts\start-dashboard.ps1
 ```
 
-## Safety
+Open:
 
-The agent never deletes emails. Low-scoring emails are only labeled `Jobs/Ignore` so you can inspect them later.
+```
+http://127.0.0.1:8765
+```
 
-The application-prep step does not auto-submit jobs. It prepares a cover letter and log entry for your review. ID numbers, passport numbers, and similar fields should be filled manually.
+---
 
-## Troubleshooting
+# Development Goals
 
-### Access blocked: app has not completed verification
+Future improvements:
 
-This usually means the OAuth app is still in Google's testing mode, but your Gmail address has not been added as a test user.
+- [ ] Improve job matching algorithm
+- [ ] Add more email providers
+- [ ] Add analytics dashboard
+- [ ] Improve document generation
+- [ ] Add application reminders
+- [ ] Add automated testing
+- [ ] Add deployment support
 
-Fix it in Google Cloud Console:
+---
 
-1. Open `APIs & Services`.
-2. Open `OAuth consent screen`.
-3. Add your Gmail address under `Test users`.
-4. Save, then run `.\scripts\dry-run.ps1` again.
+# Notes
 
-You do not need Google verification for this personal testing setup. Verification is only needed before making the app broadly available to other users.
+The cover letter generator uses local templates and does not require paid AI services.
+
+The system is intentionally designed with human review in mind:
+
+Find → Analyse → Prepare → Review → Apply
+
+The final application decision always remains with the user.
+
+---
+
+## License
+
+MIT License
