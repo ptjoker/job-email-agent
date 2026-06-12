@@ -11,3 +11,4 @@ cover_letters/
 cv/
 *.pdf
 *.docx
+.vscode/
