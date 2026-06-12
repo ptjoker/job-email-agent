@@ -1,0 +1,61 @@
+{
+  "gmail_query": "newer_than:7d (from:linkedin.com OR from:indeed.com OR from:glassdoor.com OR from:greenhouse.io OR from:lever.co OR from:workdayjobs.com OR subject:(job OR jobs OR role OR opportunity OR vacancy OR hiring))",
+  "max_messages": 100,
+  "digest_top_limit": 15,
+  "labels": {
+    "top": "Jobs/Top",
+    "maybe": "Jobs/Maybe",
+    "ignore": "Jobs/Ignore",
+    "processed": "Jobs/Processed"
+  },
+  "preferences": {
+    "target_titles": [
+      "software engineer",
+      "backend developer",
+      "full stack developer",
+      "data engineer",
+      "ai engineer"
+    ],
+    "preferred_keywords": [
+      "python",
+      "javascript",
+      "typescript",
+      "react",
+      "node",
+      "cloud",
+      "remote",
+      "hybrid"
+    ],
+    "avoid_keywords": [
+      "unpaid",
+      "commission only",
+      "door to door",
+      "internship",
+      "graduate programme"
+    ],
+    "locations": [
+      "south africa",
+      "cape town",
+      "johannesburg",
+      "remote"
+    ],
+    "remote_ok": true,
+    "seniority": [
+      "junior",
+      "mid",
+      "intermediate"
+    ]
+  },
+  "thresholds": {
+    "top": 55,
+    "maybe": 25
+  },
+  "application": {
+    "cv_path": "C:\\Users\\thaba\\Documents\\Practice\\CV.pdf",
+    "supported_sites": [
+      "indeed.com",
+      "pnet.co.za"
+    ],
+    "sensitive_fields_require_manual_entry": true
+  }
+}

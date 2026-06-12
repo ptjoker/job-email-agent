@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+config.json
+profile.json
+secrets/
+token.json
+digests/
+applications/
+cover_letters/
+cv/
+*.pdf
+*.docx
