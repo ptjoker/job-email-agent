@@ -1,0 +1,28 @@
+{
+  "full_name": "Your Full Name",
+  "email": "you@example.com",
+  "phone": "+27 00 000 0000",
+  "location": "Your City, Your Country",
+  "linkedin": "https://www.linkedin.com/in/your-profile",
+  "portfolio": "https://your-portfolio.example.com",
+  "github": "https://github.com/your-username",
+  "current_title": "Junior Software Developer",
+  "target_roles": [
+    "Software Developer",
+    "Backend Developer",
+    "Full Stack Developer"
+  ],
+  "top_skills": [
+    "Python",
+    "JavaScript",
+    "React",
+    "SQL"
+  ],
+  "experience_summary": "Write a short summary of your work experience, projects, internships, or practical background here.",
+  "education_summary": "Write a short summary of your qualification, certificates, bootcamp, or current studies here.",
+  "cover_letter_tone": "professional, direct, and warm",
+  "sensitive_fields": {
+    "id_number": "NOT COMPULSORY YOU CAN LEAVE THIS FIELD AND FILL IN YOURSELF ON THE APPLICATION FORM",
+    "passport_number": "NOT COMPULSORY YOU CAN LEAVE THIS FIELD AND FILL IN YOURSELF ON THE APPLICATION FORM"
+  }
+}
